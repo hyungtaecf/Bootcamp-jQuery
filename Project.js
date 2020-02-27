@@ -27,9 +27,15 @@ function reportWin(rowNum, colNum) {
 }
 
 function changeColor(rowIndex, colIndex, color) {
-    return table.eq(rowIndex).find("td")
+    table.eq(rowIndex).find("td")
         .eq(colIndex).find("button")
         .css("background-color", color)
+}
+
+function highlightChip(rowIndex, colIndex) {
+    table.eq(rowIndex).find("td")
+        .eq(colIndex).find("button")
+        .text("X")
 }
 
 function getColor(rowIndex, colIndex) {
@@ -59,6 +65,10 @@ function horizontalWinCheck() {
     for (let row = 0; row < 6; row++) {
         for (let col = 0; col < 4; col++) {
             if (colorMatchCheck(getColor(row, col), getColor(row, col + 1), getColor(row, col + 2), getColor(row, col + 3))) {
+                highlightChip(row,col)
+                highlightChip(row,col+1)
+                highlightChip(row,col+2)
+                highlightChip(row,col+3)
                 console.log("horizontal win");
                 reportWin(row, col)
                 return true
@@ -71,6 +81,10 @@ function verticalWinCheck() {
     for (let col = 0; col < 7; col++) {
         for (let row = 0; row < 3; row++) {
             if (colorMatchCheck(getColor(row, col), getColor(row + 1, col), getColor(row + 2, col), getColor(row + 3, col))) {
+                highlightChip(row,col)
+                highlightChip(row+1,col)
+                highlightChip(row+2,col)
+                highlightChip(row+3,col)
                 console.log("vertical win");
                 reportWin(row, col)
                 return true
@@ -83,6 +97,10 @@ function diagonalWinCheck() {
     for (let row = 0; row < 3; row++) {
         for (let col = 0; col < 4; col++) {
             if (colorMatchCheck(getColor(row, col), getColor(row + 1, col + 1), getColor(row + 2, col + 2), getColor(row + 3, col + 3))) {
+                highlightChip(row,col)
+                highlightChip(row+1,col+1)
+                highlightChip(row+2,col+2)
+                highlightChip(row+3,col+3)
                 console.log("diagonal win");
                 reportWin(row, col)
                 return true
@@ -92,6 +110,10 @@ function diagonalWinCheck() {
     for (let row = 3; row <= 6; row++) {
         for (let col = 0; col < 4; col++) {
             if (colorMatchCheck(getColor(row, col), getColor(row - 1, col + 1), getColor(row - 2, col + 2), getColor(row - 3, col + 3))) {
+                highlightChip(row,col)
+                highlightChip(row-1,col+1)
+                highlightChip(row-2,col+2)
+                highlightChip(row-3,col+3)
                 console.log("diagonal win");
                 reportWin(row, col)
                 return true
